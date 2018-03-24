@@ -1024,7 +1024,9 @@ void PropertyLoadBootDefaults() {
     property_derive_build_fingerprint();
 #endif
 
-    update_sys_usb_config();
+    if (android::base::GetBoolProperty("ro.persistent_properties.ready", false)) {
+        update_sys_usb_config();
+    }
 
     // Workaround SafetyNet
     workaround_snet_properties();
